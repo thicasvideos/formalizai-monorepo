@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formaliza AI - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        .pulse-success {
+            animation: pulseSuccess 2s infinite;
+        }
+        @keyframes pulseSuccess {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+        }
+        .typing {
+            border-right: 2px solid #3b82f6;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 50% { border-color: transparent; }
+            51%, 100% { border-color: #3b82f6; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Top Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center mr-3">
+                            <i data-lucide="scale" class="h-6 w-6 text-white"></i>
+                        </div>
+                        <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Formaliza AI</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2 bg-green-50 px-3 py-1 rounded-full">
+                        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                        <span class="text-sm text-green-700 font-medium">Teste Grátis - 6 dias restantes</span>
+                    </div>
+                    
+                    <button class="p-2 text-gray-400 hover:text-gray-600">
+                        <i data-lucide="bell" class="h-5 w-5"></i>
+                    </button>
+                    
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                            <span class="text-white text-sm font-semibold">JS</span>
+                        </div>
+                        <div class="text-sm">
+                            <div class="font-medium text-gray-900">Dr. João Silva</div>
+                            <div class="text-gray-500">OAB/SP 123456</div>
+                        </div>
+                        <button class="p-1 text-gray-400 hover:text-gray-600">
+                            <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex h-screen bg-gray-50">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-sm border-r border-gray-200">
+            <div class="p-6">
+                <nav class="space-y-2">
+                    <a href="#" id="dashboardTab" class="tab-link active flex items-center px-3 py-2 text-sm font-medium rounded-md bg-blue-50 text-blue-700">
+                        <i data-lucide="home" class="h-5 w-5 mr-3"></i>
+                        Dashboard
+                    </a>
+                    <a href="#" id="documentsTab" class="tab-link flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50">
+                        <i data-lucide="file-text" class="h-5 w-5 mr-3"></i>
+                        Documentos
+                    </a>
+                    <a href="#" id="clientsTab" class="tab-link flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50">
+                        <i data-lucide="users" class="h-5 w-5 mr-3"></i>
+                        Clientes
+                    </a>
+                    <a href="#" id="templatesTab" class="tab-link flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50">
+                        <i data-lucide="layout-template" class="h-5 w-5 mr-3"></i>
+                        Modelos
+                    </a>
+                    <a href="#" id="settingsTab" class="tab-link flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50">
+                        <i data-lucide="settings" class="h-5 w-5 mr-3"></i>
+                        Configurações
+                    </a>
+                </nav>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="px-6 pb-6">
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-4">
+                    <h3 class="text-sm font-semibold text-gray-900 mb-3">Ações Rápidas</h3>
+                    <div class="space-y-2">
+                        <button id="newDocBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium flex items-center justify-center">
+                            <i data-lucide="plus" class="h-4 w-4 mr-2"></i>
+                            Novo Documento
+                        </button>
+                        <button id="newClientBtn" class="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 px-3 py-2 rounded-md text-sm font-medium flex items-center justify-center">
+                            <i data-lucide="user-plus" class="h-4 w-4 mr-2"></i>
+                            Novo Cliente
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-hidden">
+            <div class="h-full overflow-y-auto">
+                <!-- Dashboard Content -->
+                <div id="dashboardContent" class="tab-content p-6">
+                    <div class="mb-6">
+                        <h1 class="text-2xl font-bold text-gray-900">Dashboard</h1>
+                        <p class="text-gray-600">Bem-vindo de volta, Dr. João Silva!</p>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                            <div class="flex items-center">
+                                <div class="p-2 bg-blue-100 rounded-lg">
+                                    <i data-lucide="file-text" class="h-6 w-6 text-blue-600"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-gray-600">Documentos</p>
+                                    <p class="text-2xl font-bold text-gray-900">47</p>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <span class="text-green-600 text-sm font-medium">+12% este mês</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                            <div class="flex items-center">
+                                <div class="p-2 bg-green-100 rounded-lg">
+                                    <i data-lucide="clock" class="h-6 w-6 text-green-600"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-gray-600">Tempo Economizado</p>
+                                    <p class="text-2xl font-bold text-gray-900">23h</p>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <span class="text-green-600 text-sm font-medium">Este mês</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                            <div class="flex items-center">
+                                <div class="p-2 bg-purple-100 rounded-lg">
+                                    <i data-lucide="users" class="h-6 w-6 text-purple-600"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-gray-600">Clientes Ativos</p>
+                                    <p class="text-2xl font-bold text-gray-900">156</p>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <span class="text-green-600 text-sm font-medium">+8 novos</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                            <div class="flex items-center">
+                                <div class="p-2 bg-yellow-100 rounded-lg">
+                                    <i data-lucide="trending-up" class="h-6 w-6 text-yellow-600"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-gray-600">Economia</p>
+                                    <p class="text-2xl font-bold text-gray-900">R$ 4.6k</p>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <span class="text-green-600 text-sm font-medium">Este mês</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Documents -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-8">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h2 class="text-lg font-semibold text-gray-900">Documentos Recentes</h2>
+                        </div>
+                        <div class="p-6">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center">
+                                        <div class="p-2 bg-blue-100 rounded-lg mr-4">
+                                            <i data-lucide="file-text" class="h-5 w-5 text-blue-600"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-900">Procuração - Maria Silva Santos</h3>
+                                            <p class="text-sm text-gray-600">Criado hoje às 14:30</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Assinado</span>
+                                        <button class="p-1 text-gray-400 hover:text-gray-600">
+                                            <i data-lucide="more-horizontal" class="h-4 w-4"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center">
+                                        <div class="p-2 bg-purple-100 rounded-lg mr-4">
+                                            <i data-lucide="handshake" class="h-5 w-5 text-purple-600"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-900">Contrato de Honorários - João Oliveira</h3>
+                                            <p class="text-sm text-gray-600">Criado ontem às 16:45</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">Aguardando</span>
+                                        <button class="p-1 text-gray-400 hover:text-gray-600">
+                                            <i data-lucide="more-horizontal" class="h-4 w-4"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center">
+                                        <div class="p-2 bg-green-100 rounded-lg mr-4">
+                                            <i data-lucide="file-text" class="h-5 w-5 text-green-600"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-900">Procuração - Ana Costa</h3>
+                                            <p class="text-sm text-gray-600">Criado há 2 dias</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Assinado</span>
+                                        <button class="p-1 text-gray-400 hover:text-gray-600">
+                                            <i data-lucide="more-horizontal" class="h-4 w-4"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documents Content -->
+                <div id="documentsContent" class="tab-content hidden p-6">
+                    <div class="mb-6 flex justify-between items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-900">Documentos</h1>
+                            <p class="text-gray-600">Gerencie todos os seus documentos</p>
+                        </div>
+                        <button id="createDocBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium flex items-center">
+                            <i data-lucide="plus" class="h-4 w-4 mr-2"></i>
+                            Criar Documento
+                        </button>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
+                        <div class="flex flex-wrap gap-4">
+                            <select class="border border-gray-300 rounded-md px-3 py-2 text-sm">
+                                <option>Todos os tipos</option>
+                                <option>Procuração</option>
+                                <option>Contrato de Honorários</option>
+                            </select>
+                            <select class="border border-gray-300 rounded-md px-3 py-2 text-sm">
+                                <option>Todos os status</option>
+                                <option>Rascunho</option>
+                                <option>Enviado</option>
+                                <option>Assinado</option>
+                            </select>
+                            <input type="text" placeholder="Buscar por cliente..." class="border border-gray-300 rounded-md px-3 py-2 text-sm flex-1 min-w-0">
+                        </div>
+                    </div>
+
+                    <!-- Documents List -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h2 class="text-lg font-semibold text-gray-900">Todos os Documentos</h2>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Documento</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="p-2 bg-blue-100 rounded-lg mr-3">
+                                                    <i data-lucide="file-text" class="h-4 w-4 text-blue-600"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="text-sm font-medium text-gray-900">Procuração Geral</div>
+                                                    <div class="text-sm text-gray-500">DOC-2024-001</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Maria Silva Santos</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Assinado</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Hoje, 14:30</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <div class="flex space-x-2">
+                                                <button class="text-blue-600 hover:text-blue-900">Ver</button>
+                                                <button class="text-gray-600 hover:text-gray-900">Download</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="p-2 bg-purple-100 rounded-lg mr-3">
+                                                    <i data-lucide="handshake" class="h-4 w-4 text-purple-600"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="text-sm font-medium text-gray-900">Contrato de Honorários</div>
+                                                    <div class="text-sm text-gray-500">DOC-2024-002</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">João Oliveira</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">Aguardando</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Ontem, 16:45</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <div class="flex space-x-2">
+                                                <button class="text-blue-600 hover:text-blue-900">Ver</button>
+                                                <button class="text-orange-600 hover:text-orange-900">Reenviar</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clients Content -->
+                <div id="clientsContent" class="tab-content hidden p-6">
+                    <div class="mb-6 flex justify-between items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-900">Clientes</h1>
+                            <p class="text-gray-600">Gerencie sua base de clientes</p>
+                        </div>
+                        <button id="addClientBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium flex items-center">
+                            <i data-lucide="user-plus" class="h-4 w-4 mr-2"></i>
+                            Adicionar Cliente
+                        </button>
+                    </div>
+
+                    <!-- Client Stats -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                            <div class="flex items-center">
+                                <div class="p-2 bg-blue-100 rounded-lg">
+                                    <i data-lucide="users" class="h-6 w-6 text-blue-600"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-gray-600">Total de Clientes</p>
+                                    <p class="text-2xl font-bold text-gray-900">156</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                            <div class="flex items-center">
+                                <div class="p-2 bg-green-100 rounded-lg">
+                                    <i data-lucide="user-check" class="h-6 w-6 text-green-600"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-gray-600">Clientes Ativos</p>
+                                    <p class="text-2xl font-bold text-gray-900">142</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                            <div class="flex items-center">
+                                <div class="p-2 bg-purple-100 rounded-lg">
+                                    <i data-lucide="user-plus" class="h-6 w-6 text-purple-600"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-gray-600">Novos Este Mês</p>
+                                    <p class="text-2xl font-bold text-gray-900">8</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clients List -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                            <h2 class="text-lg font-semibold text-gray-900">Lista de Clientes</h2>
+                            <input type="text" placeholder="Buscar cliente..." class="border border-gray-300 rounded-md px-3 py-2 text-sm w-64">
+                        </div>
+                        <div class="p-6">
+                            <div class="grid gap-4">
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                                            <span class="text-white font-semibold">MS</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-900">Maria Silva Santos</h3>
+                                            <p class="text-sm text-gray-600">maria.silva@email.com • CPF: 123.456.789-00</p>
+                                            <p class="text-xs text-gray-500">Última atividade: Hoje</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Ativo</span>
+                                        <button class="p-1 text-gray-400 hover:text-gray-600">
+                                            <i data-lucide="more-horizontal" class="h-4 w-4"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center mr-4">
+                                            <span class="text-white font-semibold">JO</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-900">João Oliveira</h3>
+                                            <p class="text-sm text-gray-600">joao.oliveira@email.com • CPF: 987.654.321-00</p>
+                                            <p class="text-xs text-gray-500">Última atividade: Ontem</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Ativo</span>
+                                        <button class="p-1 text-gray-400 hover:text-gray-600">
+                                            <i data-lucide="more-horizontal" class="h-4 w-4"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center mr-4">
+                                            <span class="text-white font-semibold">AC</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-900">Ana Costa</h3>
+                                            <p class="text-sm text-gray-600">ana.costa@email.com • CPF: 456.789.123-00</p>
+                                            <p class="text-xs text-gray-500">Última atividade: 2 dias atrás</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Ativo</span>
+                                        <button class="p-1 text-gray-400 hover:text-gray-600">
+                                            <i data-lucide="more-horizontal" class="h-4 w-4"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Templates Content -->
+                <div id="templatesContent" class="tab-content hidden p-6">
+                    <div class="mb-6">
+                        <h1 class="text-2xl font-bold text-gray-900">Modelos de Documentos</h1>
+                        <p class="text-gray-600">Personalize seus modelos com IA</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="p-2 bg-blue-100 rounded-lg mr-3">
+                                    <i data-lucide="file-text" class="h-6 w-6 text-blue-600"></i>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900">Procuração Geral</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">Modelo padrão para procurações gerais com poderes amplos</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500">Usado 23 vezes</span>
+                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">Usar</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="p-2 bg-purple-100 rounded-lg mr-3">
+                                    <i data-lucide="handshake" class="h-6 w-6 text-purple-600"></i>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900">Contrato de Honorários</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">Modelo para contratos de prestação de serviços advocatícios</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500">Usado 18 vezes</span>
+                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">Usar</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="p-2 bg-green-100 rounded-lg mr-3">
+                                    <i data-lucide="scale" class="h-6 w-6 text-green-600"></i>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900">Procuração Ad Judicia</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">Modelo específico para representação em processos judiciais</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500">Usado 15 vezes</span>
+                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">Usar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Content -->
+                <div id="settingsContent" class="tab-content hidden p-6">
+                    <div class="mb-6">
+                        <h1 class="text-2xl font-bold text-gray-900">Configurações</h1>
+                        <p class="text-gray-600">Personalize sua experiência</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Profile Settings -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <h2 class="text-lg font-semibold text-gray-900 mb-4">Perfil do Escritório</h2>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Nome do Escritório</label>
+                                    <input type="text" value="Silva & Associados" class="w-full border border-gray-300 rounded-md px-3 py-2">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">OAB</label>
+                                    <input type="text" value="OAB/SP 123456" class="w-full border border-gray-300 rounded-md px-3 py-2">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
+                                    <input type="email" value="joao@silvaassociados.com" class="w-full border border-gray-300 rounded-md px-3 py-2">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Telefone</label>
+                                    <input type="tel" value="(11) 99999-9999" class="w-full border border-gray-300 rounded-md px-3 py-2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Visual Identity -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <h2 class="text-lg font-semibold text-gray-900 mb-4">Identidade Visual</h2>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Logo do Escritório</label>
+                                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                                        <i data-lucide="upload" class="h-8 w-8 text-gray-400 mx-auto mb-2"></i>
+                                        <p class="text-gray-600">Clique para fazer upload da logo</p>
+                                        <p class="text-xs text-gray-500">PNG, JPG até 2MB</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Papel Timbrado</label>
+                                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                                        <i data-lucide="file-text" class="h-8 w-8 text-gray-400 mx-auto mb-2"></i>
+                                        <p class="text-gray-600">Upload do papel timbrado em PDF</p>
+                                        <p class="text-xs text-gray-500">PDF até 5MB</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Subscription -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <h2 class="text-lg font-semibold text-gray-900 mb-4">Assinatura</h2>
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium text-green-900">Teste Grátis Ativo</h3>
+                                        <p class="text-sm text-green-700">6 dias restantes do seu período de teste</p>
+                                    </div>
+                                    <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                                        Assinar Agora
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Document Creation Modal -->
+    <div id="documentModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
+            <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                <h2 class="text-xl font-bold text-gray-900">Criar Novo Documento</h2>
+                <button id="closeDocModal" class="text-gray-400 hover:text-gray-600">
+                    <i data-lucide="x" class="h-6 w-6"></i>
+                </button>
+            </div>
+            
+            <div id="docModalContent" class="p-6 overflow-y-auto max-h-[calc(90vh-80px)]">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Tab functionality
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all tabs
+                tabLinks.forEach(tab => {
+                    tab.classList.remove('active', 'bg-blue-50', 'text-blue-700');
+                    tab.classList.add('text-gray-600');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('active', 'bg-blue-50', 'text-blue-700');
+                this.classList.remove('text-gray-600');
+                
+                // Hide all content
+                tabContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+                
+                // Show corresponding content
+                const targetId = this.id.replace('Tab', 'Content');
+                document.getElementById(targetId).classList.remove('hidden');
+            });
+        });
+
+        // Document creation functionality
+        const docButtons = ['newDocBtn', 'createDocBtn'];
+        docButtons.forEach(btnId => {
+            document.getElementById(btnId).addEventListener('click', function() {
+                showDocumentCreationFlow();
+            });
+        });
+
+        document.getElementById('closeDocModal').addEventListener('click', function() {
+            document.getElementById('documentModal').classList.add('hidden');
+        });
+
+        function showDocumentCreationFlow() {
+            document.getElementById('documentModal').classList.remove('hidden');
+            startDocumentCreation();
+        }
+
+        function startDocumentCreation() {
+            const modalContent = document.getElementById('docModalContent');
+            
+            // Step 1: Choose document type
+            modalContent.innerHTML = `
+                <div class="fade-in">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-6">Passo 1: Escolha o tipo de documento</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mb-6">
+                        <div class="doc-type-card border-2 border-gray-200 rounded-lg p-6 cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all" data-type="procuracao">
+                            <div class="flex items-center mb-4">
+                                <div class="p-3 bg-blue-100 rounded-lg mr-4">
+                                    <i data-lucide="file-text" class="h-8 w-8 text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-semibold text-gray-900">Procuração</h4>
+                                    <p class="text-gray-600">Geral, específica ou ad judicia</p>
+                                </div>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Poderes gerais ou específicos</li>
+                                <li>• Representação em órgãos públicos</li>
+                                <li>• Assinatura de documentos</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="doc-type-card border-2 border-gray-200 rounded-lg p-6 cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all" data-type="contrato">
+                            <div class="flex items-center mb-4">
+                                <div class="p-3 bg-purple-100 rounded-lg mr-4">
+                                    <i data-lucide="handshake" class="h-8 w-8 text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-semibold text-gray-900">Contrato de Honorários</h4>
+                                    <p class="text-gray-600">Advocatícios ou consultoria</p>
+                                </div>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Valores e forma de pagamento</li>
+                                <li>• Escopo dos serviços</li>
+                                <li>• Cláusulas de rescisão</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <p class="text-gray-500 text-sm">Selecione um tipo de documento para continuar</p>
+                    </div>
+                </div>
+            `;
+            
+            lucide.createIcons();
+            
+            // Add click handlers for document type selection
+            document.querySelectorAll('.doc-type-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const docType = this.dataset.type;
+                    showClientSelection(docType);
+                });
+            });
+        }
+
+        function showClientSelection(docType) {
+            const modalContent = document.getElementById('docModalContent');
+            
+            modalContent.innerHTML = `
+                <div class="fade-in">
+                    <div class="flex items-center mb-6">
+                        <button onclick="startDocumentCreation()" class="text-gray-400 hover:text-gray-600 mr-4">
+                            <i data-lucide="arrow-left" class="h-5 w-5"></i>
+                        </button>
+                        <h3 class="text-lg font-semibold text-gray-900">Passo 2: Selecione o cliente</h3>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <input type="text" id="clientSearch" placeholder="Buscar cliente por nome, CPF ou e-mail..." 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    
+                    <div class="space-y-3 mb-6 max-h-60 overflow-y-auto">
+                        <div class="client-card border border-gray-200 rounded-lg p-4 cursor-pointer hover:bg-blue-50 hover:border-blue-500 transition-all" data-client="maria">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center mr-3">
+                                        <span class="text-white font-semibold text-sm">MS</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-900">Maria Silva Santos</h4>
+                                        <p class="text-sm text-gray-600">CPF: 123.456.789-00</p>
+                                        <p class="text-sm text-gray-500">maria.silva@email.com</p>
+                                    </div>
+                                </div>
+                                <div class="text-blue-600 font-medium hidden selected-indicator">✓ Selecionada</div>
+                            </div>
+                        </div>
+                        
+                        <div class="client-card border border-gray-200 rounded-lg p-4 cursor-pointer hover:bg-blue-50 hover:border-blue-500 transition-all" data-client="joao">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center mr-3">
+                                        <span class="text-white font-semibold text-sm">JO</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-900">João Oliveira</h4>
+                                        <p class="text-sm text-gray-600">CPF: 987.654.321-00</p>
+                                        <p class="text-sm text-gray-500">joao.oliveira@email.com</p>
+                                    </div>
+                                </div>
+                                <div class="text-blue-600 font-medium hidden selected-indicator">✓ Selecionado</div>
+                            </div>
+                        </div>
+                        
+                        <div class="client-card border border-gray-200 rounded-lg p-4 cursor-pointer hover:bg-blue-50 hover:border-blue-500 transition-all" data-client="ana">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center mr-3">
+                                        <span class="text-white font-semibold text-sm">AC</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-900">Ana Costa</h4>
+                                        <p class="text-sm text-gray-600">CPF: 456.789.123-00</p>
+                                        <p class="text-sm text-gray-500">ana.costa@email.com</p>
+                                    </div>
+                                </div>
+                                <div class="text-blue-600 font-medium hidden selected-indicator">✓ Selecionada</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <button class="text-blue-600 hover:text-blue-800 font-medium">
+                            + Adicionar novo cliente
+                        </button>
+                        <button id="continueBtn" class="bg-gray-300 text-gray-500 px-6 py-2 rounded-lg font-medium cursor-not-allowed" disabled>
+                            Continuar
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            lucide.createIcons();
+            
+            let selectedClient = null;
+            
+            // Add click handlers for client selection
+            document.querySelectorAll('.client-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove selection from all cards
+                    document.querySelectorAll('.client-card').forEach(c => {
+                        c.classList.remove('bg-blue-50', 'border-blue-500');
+                        c.classList.add('border-gray-200');
+                        c.querySelector('.selected-indicator').classList.add('hidden');
+                    });
+                    
+                    // Add selection to clicked card
+                    this.classList.add('bg-blue-50', 'border-blue-500');
+                    this.classList.remove('border-gray-200');
+                    this.querySelector('.selected-indicator').classList.remove('hidden');
+                    
+                    selectedClient = this.dataset.client;
+                    
+                    // Enable continue button
+                    const continueBtn = document.getElementById('continueBtn');
+                    continueBtn.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+                    continueBtn.classList.add('bg-blue-600', 'text-white', 'hover:bg-blue-700');
+                    continueBtn.disabled = false;
+                    
+                    continueBtn.onclick = () => generateDocument(docType, selectedClient);
+                });
+            });
+            
+            // Client search functionality
+            document.getElementById('clientSearch').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                document.querySelectorAll('.client-card').forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        function generateDocument(docType, clientId) {
+            const modalContent = document.getElementById('docModalContent');
+            
+            // Show AI generation process
+            modalContent.innerHTML = `
+                <div class="fade-in text-center py-12">
+                    <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 animate-spin">
+                        <i data-lucide="brain" class="h-10 w-10 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">IA Gerando Documento...</h3>
+                    <p class="text-gray-600 mb-8">Criando ${docType === 'procuracao' ? 'procuração' : 'contrato de honorários'} personalizado</p>
+                    
+                    <div class="max-w-md mx-auto bg-gray-50 rounded-lg p-6">
+                        <div class="space-y-3 text-left">
+                            <div class="flex items-center text-green-600">
+                                <i data-lucide="check" class="h-4 w-4 mr-3"></i>
+                                <span class="text-sm">Dados do cliente carregados</span>
+                            </div>
+                            <div class="flex items-center text-green-600">
+                                <i data-lucide="check" class="h-4 w-4 mr-3"></i>
+                                <span class="text-sm">Modelo selecionado</span>
+                            </div>
+                            <div id="step3" class="flex items-center text-gray-400">
+                                <div class="w-4 h-4 border-2 border-gray-300 rounded-full mr-3 animate-pulse"></div>
+                                <span class="text-sm">Personalizando cláusulas...</span>
+                            </div>
+                            <div id="step4" class="flex items-center text-gray-400">
+                                <div class="w-4 h-4 border-2 border-gray-300 rounded-full mr-3"></div>
+                                <span class="text-sm">Aplicando identidade visual</span>
+                            </div>
+                            <div id="step5" class="flex items-center text-gray-400">
+                                <div class="w-4 h-4 border-2 border-gray-300 rounded-full mr-3"></div>
+                                <span class="text-sm">Finalizando documento</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            lucide.createIcons();
+            
+            // Simulate AI generation steps
+            setTimeout(() => {
+                const step3 = document.getElementById('step3');
+                step3.innerHTML = `
+                    <div class="flex items-center text-green-600">
+                        <i data-lucide="check" class="h-4 w-4 mr-3"></i>
+                        <span class="text-sm">Personalizando cláusulas...</span>
+                    </div>
+                `;
+                lucide.createIcons();
+            }, 2000);
+            
+            setTimeout(() => {
+                const step4 = document.getElementById('step4');
+                step4.innerHTML = `
+                    <div class="flex items-center text-green-600">
+                        <i data-lucide="check" class="h-4 w-4 mr-3"></i>
+                        <span class="text-sm">Aplicando identidade visual</span>
+                    </div>
+                `;
+                lucide.createIcons();
+            }, 3500);
+            
+            setTimeout(() => {
+                const step5 = document.getElementById('step5');
+                step5.innerHTML = `
+                    <div class="flex items-center text-green-600">
+                        <i data-lucide="check" class="h-4 w-4 mr-3"></i>
+                        <span class="text-sm">Finalizando documento</span>
+                    </div>
+                `;
+                lucide.createIcons();
+            }, 5000);
+            
+            // Show completed document
+            setTimeout(() => {
+                showCompletedDocument(docType, clientId);
+            }, 6500);
+        }
+
+        function showCompletedDocument(docType, clientId) {
+            const modalContent = document.getElementById('docModalContent');
+            
+            const clientNames = {
+                'maria': 'Maria Silva Santos',
+                'joao': 'João Oliveira',
+                'ana': 'Ana Costa'
+            };
+            
+            const clientName = clientNames[clientId];
+            const docTypeName = docType === 'procuracao' ? 'Procuração' : 'Contrato de Honorários';
+            
+            modalContent.innerHTML = `
+                <div class="fade-in">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mr-4 pulse-success">
+                                <i data-lucide="check" class="h-6 w-6 text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900">${docTypeName} Gerado com Sucesso!</h3>
+                                <p class="text-gray-600">Cliente: ${clientName}</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-sm text-gray-500">Tempo de geração</div>
+                            <div class="text-lg font-bold text-green-600">2min 15s</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Document Preview -->
+                    <div class="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg p-6 mb-6">
+                        <div class="bg-white border border-gray-300 rounded-lg p-8 max-w-2xl mx-auto shadow-sm">
+                            <div class="text-center mb-6">
+                                <div class="text-blue-600 font-bold text-xl">SILVA & ASSOCIADOS</div>
+                                <div class="text-sm text-gray-600">Advocacia e Consultoria Jurídica</div>
+                                <div class="text-sm text-gray-600">OAB/SP 123456</div>
+                                <hr class="my-4">
+                            </div>
+                            
+                            <div class="text-left space-y-4">
+                                <div class="text-center font-bold text-gray-900 text-lg mb-6">${docTypeName.toUpperCase()}</div>
+                                
+                                ${docType === 'procuracao' ? `
+                                    <p><strong>OUTORGANTE:</strong> ${clientName.toUpperCase()}, brasileira, solteira, empresária, portadora do RG nº 12.345.678-9 SSP/SP, inscrita no CPF sob nº 123.456.789-00, residente e domiciliada na Rua das Flores, 123, São Paulo/SP.</p>
+                                    
+                                    <p><strong>OUTORGADO:</strong> Dr. João Silva, advogado, inscrito na OAB/SP sob nº 123456, com escritório na Av. Paulista, 1000, São Paulo/SP.</p>
+                                    
+                                    <p>Pelo presente instrumento particular, o outorgante confere ao outorgado os mais amplos poderes para representá-lo perante quaisquer órgãos públicos, repartições, empresas e instituições...</p>
+                                ` : `
+                                    <p><strong>CONTRATANTE:</strong> ${clientName.toUpperCase()}, já qualificado.</p>
+                                    
+                                    <p><strong>CONTRATADO:</strong> Silva & Associados, sociedade de advogados, inscrita na OAB/SP.</p>
+                                    
+                                    <p><strong>OBJETO:</strong> Prestação de serviços advocatícios para assessoria jurídica e representação em questões cíveis...</p>
+                                    
+                                    <p><strong>HONORÁRIOS:</strong> R$ 5.000,00 (cinco mil reais), pagos em 3 parcelas mensais...</p>
+                                `}
+                                
+                                <div class="text-center mt-8 pt-6 border-t">
+                                    <div class="text-sm text-gray-500">São Paulo, ${new Date().toLocaleDateString('pt-BR')}</div>
+                                    <div class="mt-8 grid grid-cols-2 gap-8">
+                                        <div class="border-t border-gray-300 pt-2">
+                                            <div class="text-sm font-medium">${clientName}</div>
+                                            <div class="text-xs text-gray-500">${docType === 'procuracao' ? 'Outorgante' : 'Contratante'}</div>
+                                        </div>
+                                        <div class="border-t border-gray-300 pt-2">
+                                            <div class="text-sm font-medium">Dr. João Silva</div>
+                                            <div class="text-xs text-gray-500">${docType === 'procuracao' ? 'Outorgado' : 'Contratado'}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex justify-between items-center">
+                        <div class="flex space-x-3">
+                            <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 flex items-center">
+                                <i data-lucide="edit" class="h-4 w-4 mr-2"></i>
+                                Editar
+                            </button>
+                            <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 flex items-center">
+                                <i data-lucide="download" class="h-4 w-4 mr-2"></i>
+                                Download PDF
+                            </button>
+                        </div>
+                        <button onclick="sendForSignature('${docType}', '${clientName}')" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium flex items-center">
+                            <i data-lucide="send" class="h-4 w-4 mr-2"></i>
+                            Enviar para Assinatura
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            lucide.createIcons();
+        }
+
+        function sendForSignature(docType, clientName) {
+            const modalContent = document.getElementById('docModalContent');
+            
+            modalContent.innerHTML = `
+                <div class="fade-in text-center py-12">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="mail" class="h-8 w-8 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Documento Enviado! 🎉</h3>
+                    <p class="text-gray-600 mb-8">E-mail de assinatura digital enviado para ${clientName}</p>
+                    
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-6 max-w-md mx-auto mb-8">
+                        <div class="space-y-3">
+                            <div class="flex items-center text-green-800">
+                                <i data-lucide="check-circle" class="h-5 w-5 mr-3"></i>
+                                <span class="text-sm">E-mail enviado com sucesso</span>
+                            </div>
+                            <div class="flex items-center text-green-800">
+                                <i data-lucide="check-circle" class="h-5 w-5 mr-3"></i>
+                                <span class="text-sm">Link de assinatura gerado</span>
+                            </div>
+                            <div class="flex items-center text-green-800">
+                                <i data-lucide="check-circle" class="h-5 w-5 mr-3"></i>
+                                <span class="text-sm">Notificações ativadas</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-md mx-auto mb-8">
+                        <h4 class="font-semibold text-blue-900 mb-2">Próximos passos:</h4>
+                        <div class="text-sm text-blue-800 space-y-1">
+                            <div>1. Cliente recebe e-mail com link seguro</div>
+                            <div>2. Assinatura eletrônica pelo celular/computador</div>
+                            <div>3. Você recebe notificação quando assinado</div>
+                            <div>4. Documento arquivado automaticamente</div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <button onclick="document.getElementById('documentModal').classList.add('hidden')" 
+                                class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold">
+                            Voltar ao Dashboard
+                        </button>
+                        <button onclick="startDocumentCreation()" 
+                                class="w-full border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50">
+                            Criar Outro Documento
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            lucide.createIcons();
+        }
+
+        // Client management
+        document.getElementById('newClientBtn').addEventListener('click', function() {
+            alert('🔧 Funcionalidade de cadastro de cliente em desenvolvimento...');
+        });
+
+        document.getElementById('addClientBtn').addEventListener('click', function() {
+            alert('🔧 Funcionalidade de cadastro de cliente em desenvolvimento...');
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('documentModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

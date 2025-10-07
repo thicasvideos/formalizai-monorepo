@@ -1,0 +1,112 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tenant {
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  razaoSocial  String
+  nomeFantasia String?
+  cnpj         String   @unique
+  logoUrl      String?
+  enderecoJson Json?
+  contatoJson  Json?
+  politicaJson Json?
+  users        User[]
+  clients      Client[]
+  documents    Document[]
+}
+
+model User {
+  id        String   @id @default(cuid())
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+  email     String   @unique
+  name      String?
+  role      String
+  oab       String?
+  uf        String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum ClientType {
+  PF
+  PJ
+}
+
+model Client {
+  id           String    @id @default(cuid())
+  tenantId     String
+  tenant       Tenant    @relation(fields: [tenantId], references: [id])
+  type         ClientType
+  pfJson       Json?
+  pjJson       Json?
+  email        String?
+  telefone     String?
+  enderecoJson Json?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  documents    Document[]
+}
+
+enum DocumentType {
+  PROCURACAO
+  CONTRATO_HONORARIOS
+}
+
+enum DocumentStatus {
+  DRAFT
+  READY
+  FOR_SIGNATURE
+  SIGNED
+  CANCELLED
+}
+
+model Document {
+  id         String         @id @default(cuid())
+  tenantId   String
+  tenant     Tenant         @relation(fields: [tenantId], references: [id])
+  clientId   String
+  client     Client         @relation(fields: [clientId], references: [id])
+  type       DocumentType
+  status     DocumentStatus @default(DRAFT)
+  paramsJson Json
+  pdfUrl     String?
+  hashSha256 String?
+  signers    Signer[]
+  auditLogs  AuditLog[]
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+}
+
+model Signer {
+  id           String   @id @default(cuid())
+  documentId   String
+  document     Document @relation(fields: [documentId], references: [id])
+  name         String
+  email        String
+  phone        String?
+  role         String
+  token        String   @unique
+  signedAt     DateTime?
+  ip           String?
+  userAgent    String?
+  manifestJson Json?
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  documentId String
+  document   Document @relation(fields: [documentId], references: [id])
+  at         DateTime @default(now())
+  actorId    String?
+  action     String
+  details    Json?
+}

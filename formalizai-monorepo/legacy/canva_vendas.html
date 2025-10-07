@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formaliza AI - Automatize Documentos Jurídicos em Segundos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide-up {
+            animation: slideUp 0.6s ease-out;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .pulse-glow {
+            animation: pulseGlow 2s infinite;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.8); }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        }
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .video-placeholder:hover {
+            transform: scale(1.02);
+        }
+        .pricing-card {
+            transition: all 0.3s ease;
+        }
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .feature-icon {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center mr-3">
+                            <i data-lucide="scale" class="h-6 w-6 text-white"></i>
+                        </div>
+                        <span class="text-2xl font-bold gradient-text">Formaliza AI</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#features" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                        Recursos
+                    </a>
+                    <a href="#pricing" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                        Preços
+                    </a>
+                    <a href="#demo" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                        Demo
+                    </a>
+                    <button id="loginBtn" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                        Entrar
+                    </button>
+                    <button id="startTrialBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg text-sm font-medium pulse-glow">
+                        Teste Grátis
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center fade-in">
+                <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                    Pare de Perder <span class="gradient-text">Horas</span><br>
+                    Fazendo Procurações
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                    Gere procurações e contratos de honorários em <strong>segundos</strong> com nossa IA. 
+                    Economize até <strong>95% do tempo</strong> que você gasta criando documentos jurídicos.
+                </p>
+                
+                <!-- Time Comparison -->
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+                    <div class="bg-red-50 border-2 border-red-200 rounded-xl p-6">
+                        <div class="flex items-center justify-center mb-4">
+                            <i data-lucide="clock" class="h-12 w-12 text-red-600"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-red-800 mb-2">Método Tradicional</h3>
+                        <p class="text-red-700 text-lg mb-4">⏰ 30-45 minutos por documento</p>
+                        <ul class="text-red-600 text-sm space-y-2">
+                            <li>• Buscar modelo no computador</li>
+                            <li>• Preencher dados manualmente</li>
+                            <li>• Revisar e formatar</li>
+                            <li>• Imprimir e organizar</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-green-50 border-2 border-green-200 rounded-xl p-6">
+                        <div class="flex items-center justify-center mb-4">
+                            <i data-lucide="zap" class="h-12 w-12 text-green-600"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-green-800 mb-2">Com Formaliza AI</h3>
+                        <p class="text-green-700 text-lg mb-4">⚡ 2-3 minutos por documento</p>
+                        <ul class="text-green-600 text-sm space-y-2">
+                            <li>• Selecionar cliente cadastrado</li>
+                            <li>• IA gera automaticamente</li>
+                            <li>• Enviar para assinatura digital</li>
+                            <li>• Pronto! ✨</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button id="startFreeBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold pulse-glow">
+                        🚀 Começar Gratuitamente
+                    </button>
+                    <button id="watchDemoBtn" class="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-lg text-lg font-semibold">
+                        ▶️ Ver Demonstração
+                    </button>
+                </div>
+                
+                <p class="text-sm text-gray-500 mt-4">✅ Sem cartão de crédito • ✅ Teste por 7 dias grátis</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Video Section -->
+    <section id="demo" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Veja Como é <span class="gradient-text">Rápido</span>
+                </h2>
+                <p class="text-xl text-gray-600">
+                    De 45 minutos para 2 minutos. Veja a diferença na prática.
+                </p>
+            </div>
+            
+            <div class="video-container slide-up">
+                <div class="video-placeholder" id="demoVideo">
+                    <div class="text-center text-white">
+                        <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="play" class="h-10 w-10 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Demonstração Completa</h3>
+                        <p class="text-blue-100">Veja como gerar uma procuração em menos de 3 minutos</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Video Stats -->
+            <div class="grid md:grid-cols-3 gap-6 mt-12">
+                <div class="text-center bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">95%</div>
+                    <p class="text-gray-600">Redução no tempo</p>
+                </div>
+                <div class="text-center bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-3xl font-bold text-green-600 mb-2">100%</div>
+                    <p class="text-gray-600">Conformidade LGPD</p>
+                </div>
+                <div class="text-center bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-3xl font-bold text-purple-600 mb-2">0</div>
+                    <p class="text-gray-600">Erros de digitação</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Tudo que Você Precisa em <span class="gradient-text">Uma Plataforma</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Desenvolvido especialmente para advogados que valorizam tempo e eficiência
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="text-center slide-up">
+                    <div class="feature-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="zap" class="h-8 w-8 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Geração Instantânea</h3>
+                    <p class="text-gray-600">
+                        IA avançada gera procurações e contratos em segundos. Apenas selecione o cliente e pronto!
+                    </p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="text-center slide-up" style="animation-delay: 0.1s;">
+                    <div class="feature-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="palette" class="h-8 w-8 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Identidade Visual Própria</h3>
+                    <p class="text-gray-600">
+                        Use sua logo, cores e papel timbrado. Cada documento reflete a identidade do seu escritório.
+                    </p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="text-center slide-up" style="animation-delay: 0.2s;">
+                    <div class="feature-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="pen-tool" class="h-8 w-8 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Assinatura Digital</h3>
+                    <p class="text-gray-600">
+                        Envie documentos por email para assinatura eletrônica. Trilha de auditoria completa.
+                    </p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="text-center slide-up" style="animation-delay: 0.3s;">
+                    <div class="feature-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="shield-check" class="h-8 w-8 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">100% LGPD</h3>
+                    <p class="text-gray-600">
+                        Totalmente em conformidade com a LGPD. Seus dados e dos clientes sempre protegidos.
+                    </p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="text-center slide-up" style="animation-delay: 0.4s;">
+                    <div class="feature-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="users" class="h-8 w-8 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Gestão de Clientes</h3>
+                    <p class="text-gray-600">
+                        Cadastre clientes PF e PJ uma vez. Reutilize os dados em todos os documentos.
+                    </p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="text-center slide-up" style="animation-delay: 0.5s;">
+                    <div class="feature-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="eye" class="h-8 w-8 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Visual Law</h3>
+                    <p class="text-gray-600">
+                        Contratos com ícones, cores e layout didático. Clientes entendem melhor e assinam mais rápido.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-gradient-to-br from-blue-50 to-indigo-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Planos que <span class="gradient-text">Cabem no Seu Bolso</span>
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Economize tempo e dinheiro. Escolha o plano ideal para você.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Individual Plan -->
+                <div class="pricing-card bg-white rounded-2xl shadow-lg p-8 border-2 border-gray-200">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Individual</h3>
+                        <p class="text-gray-600 mb-6">Para advogados autônomos</p>
+                        
+                        <div class="mb-6">
+                            <div class="text-4xl font-bold text-blue-600 mb-2">R$ 49,90</div>
+                            <p class="text-gray-500">/mês</p>
+                        </div>
+                        
+                        <ul class="text-left space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 text-green-500 mr-3"></i>
+                                <span>1 usuário</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 text-green-500 mr-3"></i>
+                                <span>Documentos ilimitados</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 text-green-500 mr-3"></i>
+                                <span>Assinatura eletrônica</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 text-green-500 mr-3"></i>
+                                <span>Personalização visual</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 text-green-500 mr-3"></i>
+                                <span>Suporte por email</span>
+                            </li>
+                        </ul>
+                        
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold mb-4">
+                            Começar Teste Grátis
+                        </button>
+                        
+                        <div class="text-center">
+                            <p class="text-sm text-gray-500 mb-2">Ou pague anualmente:</p>
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                                <div class="text-2xl font-bold text-green-600">R$ 499,90</div>
+                                <p class="text-sm text-green-700">Economize R$ 98,90/ano</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Office Plan - Most Popular -->
+                <div class="pricing-card bg-white rounded-2xl shadow-xl p-8 border-2 border-blue-500 relative transform scale-105">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-blue-500 text-white px-6 py-2 rounded-full text-sm font-semibold">
+                            MAIS POPULAR
+                        </span>
+                    </div>
+                    
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Escritório</h3>
+                        <p class="text-gray-600 mb-6">Para escritórios e equipes</p>
+                        
+                        <div class="mb-6">
+                            <div class="text-4xl font-bold text-blue-600 mb-2">R$ 119,90</div>
+                            <p class="text-gray-500">/mês</p>
+                        </div>
+                        
+                        <ul class="text-left space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 text-green-500 mr-3"></i>
+                                <span><strong>Usuários ilimitados</strong></span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 text-green-500 mr-3"></i>
+                                <span>Documentos ilimitados</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 text-green-500 mr-3"></i>
+                                <span>Assinatura eletrônica</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 text-green-500 mr-3"></i>
+                                <span>Personalização visual</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 text-green-500 mr-3"></i>
+                                <span>Visual Law com IA</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 text-green-500 mr-3"></i>
+                                <span>Papel timbrado próprio</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 text-green-500 mr-3"></i>
+                                <span>Suporte prioritário</span>
+                            </li>
+                        </ul>
+                        
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold mb-4 pulse-glow">
+                            Começar Teste Grátis
+                        </button>
+                        
+                        <div class="text-center">
+                            <p class="text-sm text-gray-500 mb-2">Ou pague anualmente:</p>
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                                <div class="text-2xl font-bold text-green-600">R$ 1.199,90</div>
+                                <p class="text-sm text-green-700">Economize R$ 238,90/ano</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Enterprise Plan - HIDDEN VISUALLY -->
+                <div class="pricing-card bg-white rounded-2xl shadow-lg p-8 border-2 border-gray-200 hidden" style="display: none !important;">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Enterprise</h3>
+                        <p class="text-gray-600 mb-6">Para grandes escritórios</p>
+                        
+                        <div class="mb-6">
+                            <div class="text-4xl font-bold text-blue-600 mb-2">Sob</div>
+                            <div class="text-2xl font-bold text-blue-600 -mt-2 mb-2">Consulta</div>
+                            <p class="text-gray-500">Preço personalizado</p>
+                        </div>
+                        
+                        <ul class="text-left space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 text-green-500 mr-3"></i>
+                                <span>Tudo do plano Escritório</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 text-green-500 mr-3"></i>
+                                <span>API personalizada</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 text-green-500 mr-3"></i>
+                                <span>Integração com sistemas</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 text-green-500 mr-3"></i>
+                                <span>Treinamento da equipe</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 text-green-500 mr-3"></i>
+                                <span>Suporte 24/7</span>
+                            </li>
+                        </ul>
+                        
+                        <button class="w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-50 py-3 rounded-lg font-semibold">
+                            Falar com Vendas
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Money Back Guarantee -->
+            <div class="text-center mt-12 fade-in">
+                <div class="bg-white rounded-xl p-8 shadow-lg max-w-2xl mx-auto">
+                    <div class="flex items-center justify-center mb-4">
+                        <i data-lucide="shield-check" class="h-12 w-12 text-green-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Garantia de 30 Dias</h3>
+                    <p class="text-gray-600">
+                        Não ficou satisfeito? Devolvemos 100% do seu dinheiro, sem perguntas.
+                        Teste sem riscos por 30 dias completos.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Calcule Sua <span class="gradient-text">Economia</span>
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Veja quanto tempo e dinheiro você vai economizar
+                </p>
+            </div>
+            
+            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Calculadora de ROI</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Quantos documentos você faz por mês?
+                                </label>
+                                <input type="number" id="docsPerMonth" value="20" min="1" max="1000" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Quanto você cobra por hora? (R$)
+                                </label>
+                                <input type="number" id="hourlyRate" value="200" min="50" max="2000" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6">
+                        <h4 class="text-xl font-bold text-gray-900 mb-4">Sua Economia Mensal:</h4>
+                        
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Tempo economizado:</span>
+                                <span class="font-bold text-blue-600" id="timeSaved">13.3 horas</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Valor economizado:</span>
+                                <span class="font-bold text-green-600" id="moneySaved">R$ 2.660,00</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Custo do Formaliza AI:</span>
+                                <span class="font-bold text-gray-900">R$ 49,90</span>
+                            </div>
+                            
+                            <hr class="border-gray-200">
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-semibold text-gray-900">Lucro líquido:</span>
+                                <span class="text-2xl font-bold text-green-600" id="netProfit">R$ 2.610,10</span>
+                            </div>
+                            
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
+                                <p class="text-green-800 text-center font-semibold">
+                                    ROI de <span id="roiPercent">5.230%</span> ao mês! 🚀
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Perguntas <span class="gradient-text">Frequentes</span>
+                </h2>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="bg-white rounded-xl p-6 shadow-md">
+                    <button class="faq-question w-full text-left flex justify-between items-center">
+                        <h3 class="text-lg font-semibold text-gray-900">
+                            Preciso criar um backend para usar o Formaliza AI?
+                        </h3>
+                        <i data-lucide="chevron-down" class="h-5 w-5 text-gray-500"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-4">
+                        <p class="text-gray-600">
+                            <strong>Não!</strong> O Formaliza AI é uma solução completa SaaS (Software as a Service). 
+                            Tudo funciona na nuvem - você só precisa se cadastrar e começar a usar. 
+                            Não há necessidade de instalar nada ou criar backend. Todos os dados são salvos 
+                            automaticamente e sincronizados entre dispositivos.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-md">
+                    <button class="faq-question w-full text-left flex justify-between items-center">
+                        <h3 class="text-lg font-semibold text-gray-900">
+                            Posso usar meu próprio papel timbrado?
+                        </h3>
+                        <i data-lucide="chevron-down" class="h-5 w-5 text-gray-500"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-4">
+                        <p class="text-gray-600">
+                            <strong>Sim!</strong> Você pode fazer upload do seu papel timbrado em PDF e ele será 
+                            aplicado automaticamente a todos os documentos. Não precisa seguir nenhum padrão específico - 
+                            nossa IA se adapta ao seu layout existente, mantendo a identidade visual do seu escritório.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-md">
+                    <button class="faq-question w-full text-left flex justify-between items-center">
+                        <h3 class="text-lg font-semibold text-gray-900">
+                            Como funciona o plano Escritório com usuários ilimitados?
+                        </h3>
+                        <i data-lucide="chevron-down" class="h-5 w-5 text-gray-500"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-4">
+                        <p class="text-gray-600">
+                            No plano Escritório (R$ 119,90/mês), todos os advogados e funcionários do escritório 
+                            podem usar a plataforma. Cada um tem seu próprio login, mas compartilham a base de 
+                            clientes e documentos do escritório. Ideal para equipes que trabalham colaborativamente.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-md">
+                    <button class="faq-question w-full text-left flex justify-between items-center">
+                        <h3 class="text-lg font-semibold text-gray-900">
+                            A assinatura eletrônica tem validade jurídica?
+                        </h3>
+                        <i data-lucide="chevron-down" class="h-5 w-5 text-gray-500"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-4">
+                        <p class="text-gray-600">
+                            <strong>Sim!</strong> Utilizamos assinatura eletrônica simples, que tem plena validade 
+                            jurídica conforme a Lei 14.063/2020. Cada assinatura gera uma trilha de auditoria completa 
+                            com data, hora, IP e verificação por email/SMS, garantindo a autenticidade do documento.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-md">
+                    <button class="faq-question w-full text-left flex justify-between items-center">
+                        <h3 class="text-lg font-semibold text-gray-900">
+                            Meus dados estão seguros?
+                        </h3>
+                        <i data-lucide="chevron-down" class="h-5 w-5 text-gray-500"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-4">
+                        <p class="text-gray-600">
+                            <strong>Absolutamente!</strong> Somos 100% conformes com a LGPD. Todos os dados são 
+                            criptografados, armazenados em servidores seguros no Brasil, e você tem controle total 
+                            sobre as informações dos seus clientes. Nunca compartilhamos ou vendemos dados.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-br from-blue-600 to-blue-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+                    Pronto para Economizar <br>
+                    <span class="text-blue-200">95% do Seu Tempo?</span>
+                </h2>
+                <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+                    Junte-se a centenas de advogados que já transformaram sua prática jurídica com o Formaliza AI
+                </p>
+                
+                <div class="flex justify-center mb-8">
+                    <button id="finalCtaBtn" class="bg-white text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-lg text-lg font-semibold pulse-glow">
+                        🚀 Começar Teste Grátis Agora
+                    </button>
+                </div>
+                
+                <div class="flex items-center justify-center space-x-8 text-blue-200">
+                    <div class="flex items-center">
+                        <i data-lucide="check-circle" class="h-5 w-5 mr-2"></i>
+                        <span>7 dias grátis</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i data-lucide="check-circle" class="h-5 w-5 mr-2"></i>
+                        <span>Sem cartão de crédito</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i data-lucide="check-circle" class="h-5 w-5 mr-2"></i>
+                        <span>Cancele quando quiser</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center mr-2">
+                            <i data-lucide="scale" class="h-5 w-5 text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold">Formaliza AI</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Automatize documentos jurídicos com inteligência artificial.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Produto</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#features" class="hover:text-white">Recursos</a></li>
+                        <li><a href="#pricing" class="hover:text-white">Preços</a></li>
+                        <li><a href="#demo" class="hover:text-white">Demo</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Suporte</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Central de Ajuda</a></li>
+                        <li><a href="#" class="hover:text-white">Contato</a></li>
+                        <li><a href="#" class="hover:text-white">Status</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Privacidade</a></li>
+                        <li><a href="#" class="hover:text-white">Termos</a></li>
+                        <li><a href="#" class="hover:text-white">LGPD</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Formaliza AI. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="scale" class="h-6 w-6 text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900">Entrar no Formaliza AI</h3>
+            </div>
+            
+            <form id="loginForm">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
+                        <input type="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Senha</label>
+                        <input type="password" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+                
+                <div class="mt-6">
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium">
+                        Entrar
+                    </button>
+                </div>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600">
+                    Não tem conta? 
+                    <button id="goToSignup" class="text-blue-600 hover:text-blue-500 font-medium">
+                        Teste grátis por 7 dias
+                    </button>
+                </p>
+            </div>
+            
+            <button id="closeLoginModal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i data-lucide="x" class="h-6 w-6"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ROI Calculator
+        function updateROI() {
+            const docsPerMonth = parseInt(document.getElementById('docsPerMonth').value) || 20;
+            const hourlyRate = parseInt(document.getElementById('hourlyRate').value) || 200;
+            
+            // Calculations
+            const timePerDocTraditional = 0.75; // 45 minutes
+            const timePerDocAI = 0.05; // 3 minutes
+            const timeSavedPerDoc = timePerDocTraditional - timePerDocAI;
+            const totalTimeSaved = docsPerMonth * timeSavedPerDoc;
+            const moneySaved = totalTimeSaved * hourlyRate;
+            const costFormaliza = 49.90;
+            const netProfit = moneySaved - costFormaliza;
+            const roi = ((netProfit / costFormaliza) * 100).toFixed(0);
+            
+            // Update display
+            document.getElementById('timeSaved').textContent = `${totalTimeSaved.toFixed(1)} horas`;
+            document.getElementById('moneySaved').textContent = `R$ ${moneySaved.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+            document.getElementById('netProfit').textContent = `R$ ${netProfit.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+            document.getElementById('roiPercent').textContent = `${roi}%`;
+        }
+
+        // Event listeners for ROI calculator
+        document.getElementById('docsPerMonth').addEventListener('input', updateROI);
+        document.getElementById('hourlyRate').addEventListener('input', updateROI);
+
+        // Initialize ROI calculator
+        updateROI();
+
+        // FAQ functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                
+                if (answer.classList.contains('hidden')) {
+                    answer.classList.remove('hidden');
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    answer.classList.add('hidden');
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+
+        // Demo video functionality - Interactive simulation
+        document.getElementById('demoVideo').addEventListener('click', function() {
+            startInteractiveDemo();
+        });
+
+        function startInteractiveDemo() {
+            // Create demo modal
+            const demoModal = document.createElement('div');
+            demoModal.className = 'fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50';
+            demoModal.innerHTML = `
+                <div class="relative max-w-6xl w-full mx-4 h-full flex items-center">
+                    <button class="absolute top-4 right-4 text-white hover:text-gray-300 text-2xl font-bold z-10" onclick="this.parentElement.parentElement.remove()">
+                        ✕ Fechar
+                    </button>
+                    <div class="bg-white rounded-lg w-full max-h-[90vh] overflow-hidden">
+                        <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-4 flex justify-between items-center">
+                            <h3 class="text-xl font-bold">🎥 Demo: Criando Procuração com Formaliza AI</h3>
+                            <div class="flex items-center space-x-4">
+                                <div class="bg-red-500 w-3 h-3 rounded-full animate-pulse"></div>
+                                <span class="text-sm">AO VIVO</span>
+                                <div id="demoTimer" class="bg-black bg-opacity-30 px-3 py-1 rounded text-sm font-mono">00:00</div>
+                            </div>
+                        </div>
+                        <div id="demoContent" class="p-6 overflow-y-auto max-h-[calc(90vh-80px)]">
+                            <!-- Demo content will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(demoModal);
+            
+            // Start the demo simulation
+            runDemoSimulation();
+            
+            // Close modal when clicking outside
+            demoModal.addEventListener('click', function(e) {
+                if (e.target === demoModal) {
+                    demoModal.remove();
+                }
+            });
+        }
+
+        function runDemoSimulation() {
+            const demoContent = document.getElementById('demoContent');
+            const timer = document.getElementById('demoTimer');
+            let seconds = 0;
+            
+            // Start timer
+            const timerInterval = setInterval(() => {
+                seconds++;
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                timer.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }, 1000);
+
+            const steps = [
+                {
+                    delay: 500,
+                    title: "Passo 1: Acessando o Dashboard",
+                    content: `
+                        <div class="bg-gray-100 rounded-lg p-4 mb-4">
+                            <div class="flex items-center justify-between bg-blue-600 text-white p-3 rounded-t-lg">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mr-2">
+                                        <i data-lucide="scale" class="h-5 w-5"></i>
+                                    </div>
+                                    <span class="font-bold">Formaliza AI</span>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <span class="text-sm">Dr. João Silva</span>
+                                    <div class="w-8 h-8 bg-white bg-opacity-20 rounded-full"></div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-6 rounded-b-lg">
+                                <h2 class="text-2xl font-bold text-gray-900 mb-4">Dashboard</h2>
+                                <div class="grid grid-cols-3 gap-4 mb-6">
+                                    <div class="bg-blue-50 p-4 rounded-lg text-center">
+                                        <div class="text-2xl font-bold text-blue-600">47</div>
+                                        <div class="text-sm text-gray-600">Documentos este mês</div>
+                                    </div>
+                                    <div class="bg-green-50 p-4 rounded-lg text-center">
+                                        <div class="text-2xl font-bold text-green-600">23h</div>
+                                        <div class="text-sm text-gray-600">Tempo economizado</div>
+                                    </div>
+                                    <div class="bg-purple-50 p-4 rounded-lg text-center">
+                                        <div class="text-2xl font-bold text-purple-600">156</div>
+                                        <div class="text-sm text-gray-600">Clientes ativos</div>
+                                    </div>
+                                </div>
+                                <button class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 animate-pulse">
+                                    ➕ Novo Documento
+                                </button>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    delay: 3000,
+                    title: "Passo 2: Selecionando Tipo de Documento",
+                    content: `
+                        <div class="bg-gray-100 rounded-lg p-4 mb-4">
+                            <div class="bg-white p-6 rounded-lg">
+                                <h3 class="text-xl font-bold text-gray-900 mb-4">Escolha o tipo de documento:</h3>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="border-2 border-blue-500 bg-blue-50 p-4 rounded-lg cursor-pointer">
+                                        <div class="flex items-center mb-2">
+                                            <i data-lucide="file-text" class="h-6 w-6 text-blue-600 mr-2"></i>
+                                            <span class="font-semibold text-blue-900">Procuração</span>
+                                        </div>
+                                        <p class="text-sm text-blue-700">Geral, específica ou ad judicia</p>
+                                        <div class="mt-2 text-xs text-blue-600">✓ SELECIONADO</div>
+                                    </div>
+                                    <div class="border border-gray-300 p-4 rounded-lg cursor-pointer hover:bg-gray-50">
+                                        <div class="flex items-center mb-2">
+                                            <i data-lucide="handshake" class="h-6 w-6 text-gray-600 mr-2"></i>
+                                            <span class="font-semibold text-gray-900">Contrato de Honorários</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600">Advocatícios ou consultoria</p>
+                                    </div>
+                                </div>
+                                <button class="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold">
+                                    Continuar →
+                                </button>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    delay: 5000,
+                    title: "Passo 3: Selecionando Cliente",
+                    content: `
+                        <div class="bg-gray-100 rounded-lg p-4 mb-4">
+                            <div class="bg-white p-6 rounded-lg">
+                                <h3 class="text-xl font-bold text-gray-900 mb-4">Selecione o cliente:</h3>
+                                <div class="mb-4">
+                                    <input type="text" placeholder="Buscar cliente..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" value="Maria">
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="border-2 border-blue-500 bg-blue-50 p-4 rounded-lg cursor-pointer">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <div class="font-semibold text-blue-900">Maria Silva Santos</div>
+                                                <div class="text-sm text-blue-700">CPF: 123.456.789-00</div>
+                                                <div class="text-sm text-blue-700">maria.silva@email.com</div>
+                                            </div>
+                                            <div class="text-blue-600 font-bold">✓ SELECIONADA</div>
+                                        </div>
+                                    </div>
+                                    <div class="border border-gray-300 p-4 rounded-lg cursor-pointer hover:bg-gray-50">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <div class="font-semibold text-gray-900">João Oliveira</div>
+                                                <div class="text-sm text-gray-600">CPF: 987.654.321-00</div>
+                                                <div class="text-sm text-gray-600">joao.oliveira@email.com</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold">
+                                    Continuar →
+                                </button>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    delay: 7500,
+                    title: "Passo 4: IA Gerando o Documento",
+                    content: `
+                        <div class="bg-gray-100 rounded-lg p-4 mb-4">
+                            <div class="bg-white p-6 rounded-lg text-center">
+                                <div class="mb-6">
+                                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-spin">
+                                        <i data-lucide="brain" class="h-8 w-8 text-white"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">IA Trabalhando...</h3>
+                                    <p class="text-gray-600">Gerando procuração personalizada para Maria Silva Santos</p>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                                    <div class="text-left space-y-2">
+                                        <div class="flex items-center text-green-600">
+                                            <i data-lucide="check" class="h-4 w-4 mr-2"></i>
+                                            <span class="text-sm">Dados do cliente carregados</span>
+                                        </div>
+                                        <div class="flex items-center text-green-600">
+                                            <i data-lucide="check" class="h-4 w-4 mr-2"></i>
+                                            <span class="text-sm">Modelo de procuração selecionado</span>
+                                        </div>
+                                        <div class="flex items-center text-blue-600 animate-pulse">
+                                            <div class="w-4 h-4 bg-blue-600 rounded-full mr-2 animate-ping"></div>
+                                            <span class="text-sm">Personalizando cláusulas...</span>
+                                        </div>
+                                        <div class="flex items-center text-gray-400">
+                                            <div class="w-4 h-4 border-2 border-gray-300 rounded-full mr-2"></div>
+                                            <span class="text-sm">Aplicando identidade visual</span>
+                                        </div>
+                                        <div class="flex items-center text-gray-400">
+                                            <div class="w-4 h-4 border-2 border-gray-300 rounded-full mr-2"></div>
+                                            <span class="text-sm">Finalizando documento</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                                    <p class="text-blue-800 text-sm">
+                                        <strong>Tempo estimado:</strong> 15-30 segundos
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    delay: 12000,
+                    title: "Passo 5: Documento Gerado - Revisão",
+                    content: `
+                        <div class="bg-gray-100 rounded-lg p-4 mb-4">
+                            <div class="bg-white p-6 rounded-lg">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="text-xl font-bold text-gray-900">Procuração Gerada ✅</h3>
+                                    <div class="flex space-x-2">
+                                        <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm">📝 Editar</button>
+                                        <button class="bg-blue-600 text-white px-3 py-1 rounded text-sm">📄 Visualizar</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg p-4 mb-4">
+                                    <div class="text-center mb-4">
+                                        <div class="bg-white border border-gray-300 rounded-lg p-6 max-w-md mx-auto shadow-sm">
+                                            <div class="text-center mb-4">
+                                                <div class="text-blue-600 font-bold text-lg">SILVA & ASSOCIADOS</div>
+                                                <div class="text-sm text-gray-600">OAB/SP 12.345</div>
+                                                <hr class="my-3">
+                                            </div>
+                                            
+                                            <div class="text-left text-sm space-y-2">
+                                                <div class="text-center font-bold text-gray-900 mb-3">PROCURAÇÃO</div>
+                                                
+                                                <p><strong>OUTORGANTE:</strong> MARIA SILVA SANTOS, brasileira, solteira, empresária, portadora do RG nº 12.345.678-9 SSP/SP, inscrita no CPF sob nº 123.456.789-00...</p>
+                                                
+                                                <p><strong>OUTORGADO:</strong> Dr. João Silva, advogado, inscrito na OAB/SP sob nº 12.345...</p>
+                                                
+                                                <p>Pelo presente instrumento, o outorgante confere ao outorgado os mais amplos poderes para...</p>
+                                                
+                                                <div class="text-center mt-4 pt-4 border-t">
+                                                    <div class="text-xs text-gray-500">São Paulo, ${new Date().toLocaleDateString('pt-BR')}</div>
+                                                    <div class="mt-6 border-t border-gray-300 pt-2">
+                                                        <div class="text-xs">Maria Silva Santos</div>
+                                                        <div class="text-xs text-gray-500">Outorgante</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center">
+                                    <div class="text-sm text-gray-600">
+                                        ✅ Documento pronto para assinatura
+                                    </div>
+                                    <button class="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700">
+                                        📧 Enviar para Assinatura
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    delay: 16000,
+                    title: "Passo 6: Enviando para Assinatura Digital",
+                    content: `
+                        <div class="bg-gray-100 rounded-lg p-4 mb-4">
+                            <div class="bg-white p-6 rounded-lg">
+                                <h3 class="text-xl font-bold text-gray-900 mb-4">Envio para Assinatura Digital</h3>
+                                
+                                <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                                    <div class="flex items-center mb-3">
+                                        <i data-lucide="mail" class="h-5 w-5 text-green-600 mr-2"></i>
+                                        <span class="font-semibold text-green-800">E-mail enviado com sucesso!</span>
+                                    </div>
+                                    <div class="text-sm text-green-700 space-y-1">
+                                        <div>📧 Para: maria.silva@email.com</div>
+                                        <div>📋 Assunto: Procuração para Assinatura Digital</div>
+                                        <div>⏰ Enviado: ${new Date().toLocaleTimeString('pt-BR')}</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                                    <h4 class="font-semibold text-blue-900 mb-2">Status do Documento:</h4>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center text-green-600">
+                                            <i data-lucide="check-circle" class="h-4 w-4 mr-2"></i>
+                                            <span class="text-sm">Documento criado</span>
+                                        </div>
+                                        <div class="flex items-center text-green-600">
+                                            <i data-lucide="check-circle" class="h-4 w-4 mr-2"></i>
+                                            <span class="text-sm">E-mail enviado</span>
+                                        </div>
+                                        <div class="flex items-center text-yellow-600">
+                                            <i data-lucide="clock" class="h-4 w-4 mr-2"></i>
+                                            <span class="text-sm">Aguardando assinatura</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-center">
+                                    <div class="text-2xl mb-2">🎉</div>
+                                    <h4 class="text-lg font-bold text-gray-900 mb-2">Processo Concluído!</h4>
+                                    <p class="text-gray-600 mb-4">Procuração criada e enviada em menos de 3 minutos</p>
+                                    
+                                    <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                                        <div class="grid grid-cols-2 gap-4 text-center">
+                                            <div>
+                                                <div class="text-2xl font-bold text-red-600">45min</div>
+                                                <div class="text-sm text-gray-600">Método tradicional</div>
+                                            </div>
+                                            <div>
+                                                <div class="text-2xl font-bold text-green-600">2min30s</div>
+                                                <div class="text-sm text-gray-600">Com Formaliza AI</div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 text-center">
+                                            <div class="text-lg font-bold text-blue-600">95% mais rápido! ⚡</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    delay: 20000,
+                    title: "Demo Finalizada - Comece Agora!",
+                    content: `
+                        <div class="bg-gradient-to-br from-blue-50 to-green-50 rounded-lg p-6 text-center">
+                            <div class="text-4xl mb-4">🚀</div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Incrível, não é?</h3>
+                            <p class="text-lg text-gray-700 mb-6">
+                                Você acabou de ver como criar uma procuração completa em <strong>menos de 3 minutos</strong>!
+                            </p>
+                            
+                            <div class="bg-white rounded-lg p-6 mb-6 shadow-md">
+                                <h4 class="font-bold text-gray-900 mb-4">O que você economiza:</h4>
+                                <div class="grid grid-cols-3 gap-4">
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-blue-600">42min</div>
+                                        <div class="text-sm text-gray-600">Por documento</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-green-600">R$ 140</div>
+                                        <div class="text-sm text-gray-600">Em valor/hora</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-purple-600">0</div>
+                                        <div class="text-sm text-gray-600">Erros de digitação</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-4">
+                                <button onclick="alert('🚀 Redirecionando para cadastro gratuito...'); document.querySelector('.fixed').remove();" 
+                                        class="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold">
+                                    🎯 Quero Testar Grátis por 7 Dias
+                                </button>
+                            </div>
+                            
+                            <p class="text-sm text-gray-500 mt-4">
+                                ✅ Sem cartão de crédito • ✅ Cancele quando quiser • ✅ Suporte completo
+                            </p>
+                        </div>
+                    `
+                }
+            ];
+
+            // Execute each step
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    demoContent.innerHTML = `
+                        <div class="mb-4">
+                            <div class="flex items-center justify-between mb-4">
+                                <h2 class="text-2xl font-bold text-gray-900">${step.title}</h2>
+                                <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">
+                                    ${index + 1}/6
+                                </div>
+                            </div>
+                            ${step.content}
+                        </div>
+                    `;
+                    
+                    // Re-initialize Lucide icons for new content
+                    lucide.createIcons();
+                    
+                    // Stop timer at the end
+                    if (index === steps.length - 1) {
+                        clearInterval(timerInterval);
+                    }
+                }, step.delay);
+            });
+        }
+
+        // Modal functionality
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function hideModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // Login modal
+        document.getElementById('loginBtn').addEventListener('click', () => showModal('loginModal'));
+        document.getElementById('closeLoginModal').addEventListener('click', () => hideModal('loginModal'));
+
+        // CTA buttons
+        document.getElementById('startTrialBtn').addEventListener('click', function() {
+            startFreeTrial();
+        });
+
+        document.getElementById('startFreeBtn').addEventListener('click', function() {
+            startFreeTrial();
+        });
+
+        document.getElementById('finalCtaBtn').addEventListener('click', function() {
+            startFreeTrial();
+        });
+
+        document.getElementById('watchDemoBtn').addEventListener('click', function() {
+            document.getElementById('demoVideo').click();
+        });
+
+
+
+        document.getElementById('goToSignup').addEventListener('click', function() {
+            hideModal('loginModal');
+            startFreeTrial();
+        });
+
+        // Pricing buttons
+        document.querySelectorAll('.pricing-card button').forEach(button => {
+            if (button.textContent.includes('Começar Teste Grátis')) {
+                button.addEventListener('click', function() {
+                    startFreeTrial();
+                });
+            } else if (button.textContent.includes('Falar com Vendas')) {
+                button.addEventListener('click', function() {
+                    alert('💬 Redirecionando para contato comercial...');
+                });
+            }
+        });
+
+        // Free trial function
+        function startFreeTrial() {
+            // Create trial signup modal
+            const trialModal = document.createElement('div');
+            trialModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            trialModal.innerHTML = `
+                <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 relative">
+                    <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600" onclick="this.parentElement.parentElement.remove()">
+                        <i data-lucide="x" class="h-6 w-6"></i>
+                    </button>
+                    
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="zap" class="h-8 w-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Teste Grátis por 7 Dias</h3>
+                        <p class="text-gray-600">Comece a economizar tempo hoje mesmo!</p>
+                    </div>
+                    
+                    <form id="trialForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nome Completo</label>
+                            <input type="text" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Dr. João Silva">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
+                            <input type="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="joao@escritorio.com">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Telefone</label>
+                            <input type="tel" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="(11) 99999-9999">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">OAB</label>
+                            <input type="text" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="OAB/SP 123456">
+                        </div>
+                        
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                            <div class="flex items-center text-green-800 text-sm">
+                                <i data-lucide="check-circle" class="h-4 w-4 mr-2"></i>
+                                <span>✅ 7 dias grátis</span>
+                            </div>
+                            <div class="flex items-center text-green-800 text-sm mt-1">
+                                <i data-lucide="check-circle" class="h-4 w-4 mr-2"></i>
+                                <span>✅ Sem cartão de crédito</span>
+                            </div>
+                            <div class="flex items-center text-green-800 text-sm mt-1">
+                                <i data-lucide="check-circle" class="h-4 w-4 mr-2"></i>
+                                <span>✅ Cancele quando quiser</span>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-md font-semibold">
+                            🚀 Começar Teste Grátis Agora
+                        </button>
+                    </form>
+                    
+                    <p class="text-xs text-gray-500 text-center mt-4">
+                        Ao continuar, você concorda com nossos Termos de Uso e Política de Privacidade
+                    </p>
+                </div>
+            `;
+            
+            document.body.appendChild(trialModal);
+            lucide.createIcons();
+            
+            // Handle form submission
+            document.getElementById('trialForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show success message
+                trialModal.innerHTML = `
+                    <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 text-center">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="check" class="h-8 w-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Cadastro Realizado! 🎉</h3>
+                        <p class="text-gray-600 mb-6">
+                            Enviamos um e-mail com suas credenciais de acesso. 
+                            Verifique sua caixa de entrada (e spam também).
+                        </p>
+                        
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                            <h4 class="font-semibold text-blue-900 mb-2">Próximos passos:</h4>
+                            <div class="text-left text-sm text-blue-800 space-y-1">
+                                <div>1. ✅ Confirme seu e-mail</div>
+                                <div>2. 🔑 Faça login na plataforma</div>
+                                <div>3. 📋 Cadastre seu primeiro cliente</div>
+                                <div>4. ⚡ Gere sua primeira procuração</div>
+                            </div>
+                        </div>
+                        
+                        <button onclick="this.parentElement.parentElement.remove()" 
+                                class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold">
+                            Entendi, obrigado!
+                        </button>
+                    </div>
+                `;
+                lucide.createIcons();
+            });
+            
+            // Close modal when clicking outside
+            trialModal.addEventListener('click', function(e) {
+                if (e.target === trialModal) {
+                    trialModal.remove();
+                }
+            });
+        }
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with fade-in and slide-up classes
+        document.querySelectorAll('.fade-in, .slide-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('loginModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideModal('loginModal');
+            }
+        });
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('🔐 Funcionalidade de login em desenvolvimento...');
+        });
+    </script>
+</body>
+</html>
